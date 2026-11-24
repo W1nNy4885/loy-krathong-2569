@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#21105c">
+<title>ลอยกระทงออนไลน์ 2569 🌕</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root{--pink:#ff71b7;--gold:#ffd76b;--purple:#8c69ff;--deep:#170d50;--cream:#fff7e8}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Kanit',sans-serif;color:#fff;background:radial-gradient(circle at 50% 0,#4732a4,#14083e 68%);min-height:100vh;overflow-x:hidden}
+.stars{position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(#fff 1px,transparent 1px),radial-gradient(#b8d5ff 1px,transparent 1px);background-size:80px 80px,137px 137px;background-position:0 0,30px 60px;opacity:.35;z-index:-1}
+header{text-align:center;padding:28px 16px 10px;position:relative}
+h1{font-size:clamp(2.2rem,6vw,4.6rem);margin:0;line-height:1.2;color:#ff8fc9;text-shadow:0 4px #9e3d99,0 7px 20px #ffca63;font-weight:700}
+.subtitle{color:#ffe7a5;margin:10px 0;font-size:1.1rem}
+.topbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:12px}
+.btn{border:0;border-radius:999px;padding:11px 18px;font:500 1rem 'Kanit';cursor:pointer;transition:.2s;box-shadow:0 4px 0 rgba(0,0,0,.2)}
+.btn:hover{transform:translateY(-2px)}.btn-pink{background:linear-gradient(#ff9bcf,#ff5ba7);color:white}.btn-purple{background:#7458d9;color:white}.btn-gold{background:linear-gradient(#ffe99a,#ffc14f);color:#603600}
+.status{font-size:.85rem;color:#c9c3ff;text-align:center;margin:8px}
+.layout{max-width:1300px;margin:18px auto;padding:12px;display:grid;grid-template-columns:320px minmax(300px,1fr) 300px;gap:15px}
+.panel{background:linear-gradient(145deg,#fff9ee,#ffe9f5);color:#45255f;border:3px solid #ffb9df;border-radius:24px;padding:18px;box-shadow:0 10px 30px #07032b70}
+.panel h2{margin:0 0 12px;color:#8e3c9d;font-size:1.25rem}
+label{display:block;font-weight:500;margin:8px 0 5px}
+input,textarea{width:100%;border:2px solid #f2c9e5;border-radius:13px;padding:10px;font:400 1rem 'Kanit';background:#fff;color:#442255;outline:none}
+textarea{resize:vertical;min-height:90px}
+.counter{text-align:right;font-size:.8rem;color:#806c93}
+.choices{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:10px 0}
+.choice{background:white;border:2px solid #f3d3e9;border-radius:14px;padding:8px;font-size:1.7rem;cursor:pointer}
+.choice.selected{border-color:#ff56b2;box-shadow:0 0 0 2px #ffc2e3}
+.krathong-btn{width:100%;font-size:1.1rem;margin-top:10px}
+.river-card{border:3px solid #a88bff;border-radius:26px;overflow:hidden;min-height:530px;position:relative;background:linear-gradient(#21115d 0%,#4830a2 32%,#175eaa 60%,#1673b2 100%);box-shadow:0 10px 30px #08032680}
+.moon{position:absolute;top:24px;right:28px;width:90px;height:90px;border-radius:50%;background:#fff1b2;box-shadow:0 0 40px #ffe28a}
+.temple{position:absolute;top:115px;left:0;right:0;text-align:center;font-size:3rem;filter:drop-shadow(0 4px 4px #1c1257)}
+.river{position:absolute;top:195px;bottom:0;left:0;right:0;background:repeating-linear-gradient(175deg,transparent 0 22px,#8bd8ff25 23px 26px),linear-gradient(#286bc1,#103d8b)}
+.stats{position:absolute;top:15px;left:15px;background:#6849c8d9;color:#fff;padding:8px 14px;border-radius:14px;font-weight:600}
+.krathongs{position:absolute;inset:205px 0 0;overflow:hidden}
+.floaty{position:absolute;font-size:2.3rem;filter:drop-shadow(0 0 10px #ffdc69);animation:drift 9s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translateX(-7px) translateY(0)}to{transform:translateX(10px) translateY(-10px)}}
+.river-caption{position:absolute;bottom:14px;left:0;right:0;text-align:center;color:#fff5be;text-shadow:0 2px 6px #162050}
+.feed{max-height:480px;overflow:auto;display:flex;flex-direction:column;gap:9px}
+.wish{background:#fff;border-radius:14px;padding:10px;color:#57336b;border:1px solid #f2d4e9}
+.wish strong{color:#b34491}.wish small{display:block;color:#987eaa;margin-top:4px}
+footer{text-align:center;padding:20px;color:#dfd3ff}
+.modal-bg{display:none;position:fixed;inset:0;background:#070323c9;z-index:10;align-items:center;justify-content:center;padding:16px}
+.modal{background:#fff8ee;color:#4d2865;border-radius:22px;padding:24px;text-align:center;max-width:390px;width:100%}
+#qrcode{display:flex;justify-content:center;margin:15px}
+@media(max-width:950px){.layout{grid-template-columns:1fr 1fr}.river-card{grid-column:1/-1;grid-row:1;min-height:420px}.feed-panel{grid-column:2}.create-panel{grid-column:1}}
+@media(max-width:620px){.layout{grid-template-columns:1fr}.river-card{grid-column:auto;grid-row:auto;min-height:420px}.feed-panel,.create-panel{grid-column:auto}.panel{padding:15px}header{padding-top:18px}}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<header>
+<h1>🌕 ลอยกระทงออนไลน์ 2569 🪷</h1>
+<div class="subtitle">ร่วมสืบสานประเพณีไทย ส่งคำอธิษฐานไปกับสายน้ำ</div>
+<div class="topbar">
+<button class="btn btn-purple" onclick="showShare()">🔗 แชร์ให้เพื่อน</button>
+<button class="btn btn-gold" onclick="about()">✨ เกี่ยวกับประเพณี</button>
+</div>
+<div class="status" id="status">โหมดทดลองในอุปกรณ์นี้ · เชื่อมออนไลน์เพื่อให้ทุกคนเห็นกระทงร่วมกัน</div>
+</header>
+<main class="layout">
+<section class="panel create-panel">
+<h2>🪷 สร้างกระทงของคุณ</h2>
+<label for="name">ชื่อผู้ลอยกระทง</label><input id="name" maxlength="30" placeholder="เช่น อดิศร">
+<label for="wish">คำอธิษฐานของคุณ</label><textarea id="wish" maxlength="200" placeholder="ขอให้ครอบครัวมีความสุข สุขภาพแข็งแรง..."></textarea>
+<div class="counter"><span id="count">0</span>/200</div>
+<label>เลือกแบบกระทง</label>
+<div class="choices" id="choices">
+<button class="choice selected" data-k="🪷">🪷</button><button class="choice" data-k="🌸">🌸</button><button class="choice" data-k="🌼">🌼</button><button class="choice" data-k="🏵️">🏵️</button>
+</div>
+<button class="btn btn-pink krathong-btn" onclick="floatKrathong()">🕯️ ลอยกระทงกันเลย!</button>
+</section>
+<section class="river-card">
+<div class="moon"></div><div class="temple">🏯 ✨ 🛕 ✨ 🏯</div>
+<div class="stats">🪷 ลอยแล้ว <span id="total">0</span> กระทง</div>
+<div class="river"></div><div class="krathongs" id="riverKrathongs"></div>
+<div class="river-caption">ปล่อยความทุกข์ แล้วเริ่มต้นสิ่งใหม่ 💖</div>
+</section>
+<section class="panel feed-panel">
+<h2>🪷 คำอธิษฐานจากเพื่อน <span style="color:#ff5b83">● LIVE</span></h2>
+<div class="feed" id="feed"><div class="wish">ยินดีต้อนรับ! ลอยกระทงและฝากคำอธิษฐานของคุณไว้ตรงนี้ ✨</div></div>
+</section>
+</main>
+<footer>🌷 สืบสานประเพณีไทย · ลอยกระทงไปด้วยกันนะครับ/ค่ะ 💗</footer>
+<div class="modal-bg" id="modal" onclick="if(event.target===this)closeModal()"><div class="modal"><button style="float:right;border:0;background:none;font-size:1.3rem" onclick="closeModal()">✖</button><h2 id="modalTitle">แชร์เว็บไซต์</h2><div id="modalBody"></div></div></div>
+<script>
+/* To enable shared realtime mode, fill in your Supabase project URL and anon key below.
+   Local demo works without configuration. */
+const SUPABASE_URL = "YOUR_SUPABASE_URL";
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+let db=null, selected="🪷", entries=[], localMode=true;
+const $=id=>document.getElementById(id);
+$("wish").addEventListener("input",()=>$("count").textContent=$("wish").value.length);
+document.querySelectorAll(".choice").forEach(b=>b.onclick=()=>{document.querySelectorAll(".choice").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");selected=b.dataset.k});
+function safe(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function randomPos(){return {left:Math.random()*85+"%",top:Math.random()*75+"%"}}
+function render(){
+ $("total").textContent=entries.length;
+ $("riverKrathongs").innerHTML=entries.slice(-70).map((e,i)=>`<div class="floaty" style="left:${(i*37+Math.random()*3)%92}%;top:${(i*29+Math.random()*3)%78}%;animation-delay:${i%6}s">${safe(e.krathong||"🪷")}</div>`).join("");
+ $("feed").innerHTML=entries.slice().reverse().slice(0,60).map(e=>`<div class="wish">${safe(e.krathong||"🪷")} <strong>${safe(e.name||"ผู้ร่วมลอย")}</strong><br>${safe(e.wish||"ขอให้พบเจอสิ่งดี ๆ")}<small>${safe(e.created_at?new Date(e.created_at).toLocaleString("th-TH"):"เพิ่งลอย")}</small></div>`).join("")||'<div class="wish">ยังไม่มีคำอธิษฐาน เป็นคนแรกที่ลอยกระทงกันนะ 💫</div>';
+}
+async function connect(){
+ if(!SUPABASE_URL.startsWith("https://")||SUPABASE_ANON_KEY.startsWith("YOUR_"))return;
+ try{
+  db=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+  let {data,error}=await db.from("krathongs").select("*").order("created_at",{ascending:true}).limit(500);
+  if(error)throw error;
+  entries=data||[];localMode=false;$("status").textContent="🟢 ออนไลน์แล้ว · กระทงจากทุกคนจะแสดงร่วมกัน";
+  render();
+  db.channel("krathong-live").on("postgres_changes",{event:"INSERT",schema:"public",table:"krathongs"},payload=>{
+    if(!entries.some(e=>e.id===payload.new.id)){entries.push(payload.new);render()}
+  }).subscribe();
+ }catch(err){$("status").textContent="ยังเชื่อมฐานข้อมูลไม่ได้ · ใช้งานโหมดทดลองได้";}
+}
+async function floatKrathong(){
+ const name=$("name").value.trim()||"ผู้ร่วมลอย";
+ const wish=$("wish").value.trim()||"ขอให้พบเจอสิ่งดี ๆ มีความสุขและสมหวัง ✨";
+ const entry={name,wish,krathong:selected,created_at:new Date().toISOString()};
+ if(db&&!localMode){
+  const {error}=await db.from("krathongs").insert(entry);
+  if(error){alert("ส่งกระทงไม่สำเร็จ กรุณาลองใหม่");return}
+ }else{
+  entry.id=Date.now()+Math.random();entries.push(entry);
+  const saved=JSON.parse(localStorage.getItem("krathong_entries")||"[]");saved.push(entry);localStorage.setItem("krathong_entries",JSON.stringify(saved));
+ }
+ $("wish").value="";$("count").textContent="0";render();
+}
+function showShare(){
+ $("modalTitle").textContent="🔗 แชร์ให้เพื่อนมาลอยด้วยกัน";
+ $("modalBody").innerHTML=`<p>ส่งลิงก์นี้ให้เพื่อนเข้าร่วมได้เลย</p><p style="word-break:break-all">${safe(location.href)}</p><button class="btn btn-pink" onclick="copyLink()">คัดลอกลิงก์</button><div id="qrcode"></div><small>สแกน QR Code เพื่อเปิดเว็บไซต์</small>`;
+ $("modal").style.display="flex";
+ if(window.QRCode)new QRCode($("qrcode"),{text:location.href,width:180,height:180});
+}
+function copyLink(){navigator.clipboard?.writeText(location.href).then(()=>alert("คัดลอกลิงก์แล้ว!")).catch(()=>alert("คัดลอก URL จากแถบที่อยู่ได้เลย"))}
+function closeModal(){$("modal").style.display="none"}
+function about(){$("modalTitle").textContent="🌕 ประเพณีลอยกระทง";$("modalBody").innerHTML="<p>ประเพณีลอยกระทงจัดขึ้นเพื่อแสดงความขอบคุณและขอขมาต่อพระแม่คงคา รวมถึงเป็นโอกาสปล่อยสิ่งไม่ดีและตั้งจิตอธิษฐานให้เริ่มต้นใหม่อย่างสดใส</p>";$("modal").style.display="flex"}
+try{entries=JSON.parse(localStorage.getItem("krathong_entries")||"[]")}catch{entries=[]}
+render();connect();
+</script>
+</body>
+</html>
